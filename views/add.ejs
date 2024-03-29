@@ -1,0 +1,90 @@
+<%- include('partials/header.ejs'); -%>
+
+<style>
+
+
+    .gradient-background2 {
+    background: linear-gradient(300deg, #f3f2f5, #26054d, #010003);
+    background-size: 180% 180%;
+    animation: gradient-animation 12s ease infinite;
+  
+   /*background-size: cover; */
+    
+    background-attachment: fixed; /* Keep background fixed when scrolling */
+    
+  }
+  
+  
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+
+</style>
+
+<style>
+  footer {
+    flex: 0 0 auto;
+    color: white;
+    text-align: center;
+  }
+</style>
+
+    <body class="gradient-background2">
+        <div class="container">
+          
+            <!-- Form for adding a new book -->
+            <div id="newBookForm" style="display: block;">
+                <h2>Add a New Book</h2>
+
+
+                <form action="/add" method="post">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title:</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="author" class="form-label">Author:</label>
+                        <input type="text" class="form-control" id="author" name="author" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="isbn" class="form-label">ISBN:</label>
+                        <input type="text" class="form-control" id="isbn" name="isbn" required>
+                    </div>
+                    <!-- Add a hidden input field for the coverUrl -->
+                    <input type="hidden" id="coverUrl" name="coverUrl">
+                    <div class="mb-3">
+                        <label for="summary" class="form-label">Summary:</label>
+                        <textarea class="form-control" id="summary" name="summary" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Notes:</label>
+                        <textarea class="form-control" id="notes" name="notes" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Rating:</label>
+                        <input type="number" class="form-control" id="rating" name="rating" min="0" max="10" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dateread" class="form-label">Date Read:</label>
+                        <input type="date" class="form-control" id="dateread" name="dateRead" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Add Book</button>
+                </form>
+            </div>
+            <a style="text-align: center;" href="https://openlibrary.org/"><p>Link to find the books images through the API, Search the book, copy the ISBN 10 Number, for that field, under Id numbers  </p></a>
+        </div>
+
+       
+        <%- include('partials/footer.ejs'); -%>
+    </body>
+
+ 

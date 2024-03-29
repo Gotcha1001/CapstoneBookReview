@@ -1,0 +1,59 @@
+<%- include('partials/header.ejs'); -%>
+
+<body class="gradient-background2">
+  <h1>Welcome <%= username %></h1>
+
+  <!-- Form for adding a new book review -->
+  <div id="newBookForm" style="display: none;">
+    <h2>Add a New Book Review</h2>
+    <form action="/addReview" method="post">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required><br>
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" required><br>
+      <label for="isbn">ISBN:</label>
+      <input type="text" id="isbn" name="isbn" required><br>
+      <!-- Add a hidden input field for the coverUrl -->
+      <input type="hidden" id="coverUrl" name="coverUrl">
+      <label for="summary">Summary:</label>
+      <textarea id="summary" name="summary" required></textarea><br>
+      <label for="notes">Notes:</label>
+      <textarea id="notes" name="notes" required></textarea><br>
+      <label for="rating">Rating:</label>
+      <input type="number" id="rating" name="rating" min="0" max="10" required><br>
+      <label for="dateRead">Date Read:</label>
+      <input type="date" id="dateRead" name="dateRead" required><br>
+      <button type="submit">Add Book Review</button>
+    </form>
+  </div>
+
+  <!-- Button to toggle the form -->
+  <button onclick="toggleForm()">Create Book Review</button>
+
+  <!-- Display existing book reviews -->
+  <ul class="book-list">
+    <% books.forEach(book => { %>
+    <li class="book-item">
+      <img src="<%= book.coverUrl %>" alt="<%= book.title %>">
+      <h2>Book Title: <%= book.title %></h2>
+      <p>Author: <%= book.author %></p>
+      <p>Book Summary: <%= book.summary %></p>
+      <p>Book Writeup: <%= book.notes %></p>
+      <p>Book Rating <%= book.rating %>/10</p>
+      <p>Date Read: <%= book.dateRead %></p>
+    </li>
+    <% }); %>
+  </ul>
+
+  <script>
+    function toggleForm() {
+      var form = document.getElementById("newBookForm");
+      form.style.display = form.style.display === "none" ? "block" : "none";
+    }
+  </script>
+
+</body>
+
+<%- include('partials/footer.ejs'); -%>
+
+</html>

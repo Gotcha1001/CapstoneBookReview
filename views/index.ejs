@@ -1,0 +1,48 @@
+<%- include('partials/header.ejs'); -%>
+
+<body class="gradient-background2">
+  <div class="container">
+    <h1 class="text-center my-4">Book Reviews</h1>
+
+    <!-- Button to create a new review -->
+    <a href="/add" style="margin-bottom: 20px;" class="btn btn-primary">Add Book</a>
+
+    <div class="row">
+      <% books.forEach(book => { %>
+        <div class="col-md-3 mb-4"> <!-- Adjusted column size to col-md-3 -->
+          <div class="card h-100 d-flex flex-column"> <!-- Added flex utilities -->
+            <img src="<%= book.coverUrl %>" class="card-img-top" alt="<%= book.title %>">
+            <div class="card-body d-flex flex-column"> <!-- Added flex utilities -->
+              <h5 class="card-title"><%= book.title %></h5>
+              <p class="card-text">Author: <%= book.author %></p>
+              <p class="card-text">Summary: <%= book.summary %></p>
+              <p class="card-text">Notes: <%= book.notes %></p>
+              <p class="card-text">Rating: <%= book.rating %>/10</p>
+              <p class="card-text">Date Read: <%= new Date(book.dateread).toISOString().slice(0, 10) %></p>
+              <!-- Button to modify the review -->
+              <form action="/modify/<%= book.id %>" method="get" class="mt-auto"> <!-- Added mt-auto to move buttons to the bottom -->
+                <button type="submit" class="btn btn-primary">Modify</button>
+              </form>
+              <!-- Form for deleting the review -->
+              <form action="/delete" method="post">
+                <input type="hidden" name="deleteItemId" value="<%= book.id %>">
+                <button style="margin-top: 10px;" type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+
+  <%- include('partials/footer.ejs'); -%>
+
+  <script>
+    function toggleForm() {
+      var form = document.getElementById("newBookForm");
+      form.style.display = form.style.display === "none" ? "block" : "none";
+    }
+  </script>
+
+</body>
+</html>

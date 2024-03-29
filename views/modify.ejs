@@ -1,0 +1,85 @@
+<%- include('partials/header.ejs'); -%>
+<head>
+  <style>
+
+
+    .gradient-background2 {
+    background: linear-gradient(300deg, #f3f2f5, #26054d, #010003);
+    background-size: 180% 180%;
+    animation: gradient-animation 12s ease infinite;
+  
+   /*background-size: cover; */
+    
+    background-attachment: fixed; /* Keep background fixed when scrolling */
+    
+  }
+  
+  
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+
+</style>
+
+<style>
+  footer {
+    flex: 0 0 auto;
+    color: white;
+    text-align: center;
+  }
+</style>
+</head>
+
+
+<body class="gradient-background2">
+  <div class="container">
+    <h1 class="mt-5">Modify Book Review</h1>
+    <form action="/modify/<%= book.id %>" method="post">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title:</label>
+        <input type="text" id="title" name="title" value="<%= book.title %>" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="author" class="form-label">Author:</label>
+        <input type="text" id="author" name="author" value="<%= book.author %>" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="isbn" class="form-label">ISBN:</label>
+        <input type="text" id="isbn" name="isbn" value="<%= book.isbn %>" class="form-control" required>
+      </div>
+      <!-- Add a hidden input field for the coverUrl -->
+      <input type="hidden" id="coverUrl" name="coverUrl" value="<%= book.coverUrl %>">
+      <div class="mb-3">
+        <label for="summary" class="form-label">Summary:</label>
+        <textarea id="summary" name="summary" class="form-control" required><%= book.summary %></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="notes" class="form-label">Notes:</label>
+        <textarea id="notes" name="notes" class="form-control" required><%= book.notes %></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="rating" class="form-label">Rating:</label>
+        <input type="number" id="rating" name="rating" min="0" max="10" value="<%= book.rating %>" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="dateread" class="form-label">Date Read:</label>
+        <input type="date" id="dateread" name="dateRead" value="<%= book.dateread.toISOString().slice(0, 10) %>" class="form-control" required>
+
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Changes</button>
+    </form>
+  </div>
+</body>
+
+<%- include('partials/footer.ejs'); -%>
+
+</html>
