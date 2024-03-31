@@ -2,18 +2,20 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 import axios from "axios"; 
+import env from "dotenv";       //import environment variables   to install... npm i dotenv, use it = env.config();
 
 const app = express();
 const port = 3000;
+env.config();  // use environment variables
 
 app.set("view engine", "ejs"); // Set the view engine to EJS
 
 const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "bookreview",
-  password: "Axelrose747",
-  port: 5432,
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT
 });
 
 db.connect();
